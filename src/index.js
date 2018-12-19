@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {StoreContext} from 'redux-react-hook';
 import App from './components/app';
 import store from './configureStore';
 
 const rootElem = document.getElementById('app');
 ReactDOM.render(
-  <Provider store={store()}>
+  <StoreContext.Provider value={store()}>
     <App />
-  </Provider>,
+  </StoreContext.Provider>,
   rootElem
 );

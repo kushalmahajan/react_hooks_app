@@ -5,7 +5,7 @@ import { addTodo, deleteTodo } from "../actions/todos";
 import {  delay, map } from 'rxjs/operators';
 
 const initialState = {
-  todos: [],
+  todos: [{id: 0, title: 'Todo 1'}, {id: 1, title: 'Todo 2'}],
   visibilityFilter: "SHOW_ALL"
 };
 
@@ -16,7 +16,6 @@ const todosReducer = (state = initialState, action) => {
             const newList = { todos: [...todos, { title: action.title, id: counter(), completed: false }] };
             return { ...state, ...newList };
         }
-        
         case TOGGLE_TODO: 
             return { todos: todos.map(todo => {
                 if (todo.id !== action.id) return todo;
