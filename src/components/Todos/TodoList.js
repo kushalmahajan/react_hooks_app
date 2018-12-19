@@ -1,5 +1,6 @@
 import React from "react";
 import { useMappedState } from "redux-react-hook";
+import TodoItem from "./TodoItem";
 
 const mapState = ({todosReducer}) => ({
   todoCount: todosReducer.todos.length,
@@ -13,7 +14,7 @@ export default function TodoList() {
       <div>You have {todoCount} todos</div>
       <ul>
         {
-            todos.map((todo, index) => <li key={index}>{todo.title}</li>)
+            todos.map((todo, index) => <TodoItem key={index} {...todo} />)
         }
       </ul>
     </div>

@@ -5,7 +5,7 @@ import { addTodo, deleteTodo } from "../actions/todos";
 import {  delay, map } from 'rxjs/operators';
 
 const initialState = {
-  todos: [{id: 0, title: 'Todo 1'}, {id: 1, title: 'Todo 2'}],
+  todos: [{id: 0, title: 'Learn Hooks', completed: false}, {id: 1, title: 'Learn Redux', completed: false}],
   visibilityFilter: "SHOW_ALL"
 };
 
