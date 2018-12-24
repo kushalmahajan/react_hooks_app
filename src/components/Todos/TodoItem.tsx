@@ -1,10 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { useState } from "react";
 import { useDispatch } from "redux-react-hook";
-import {deleteTodoDelay, updateTodo} from '../../redux/actions/todos';
+import { deleteTodoDelay, updateTodo } from '../../redux/actions/todos';
 
+type PropTypes = {
+    id: number,
+    title: string
+}
 
-const TodoItem = ({ id, title }) => {
+const TodoItem = ({ id, title }: PropTypes) => {
     const [saveMode, setSaveMode] = useState(false);
     const [inputVal, setInputVal] = useState(title);
     const dispatch = useDispatch();

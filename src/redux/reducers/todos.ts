@@ -3,13 +3,28 @@ import counter from "../../helpers/counter";
 import { ofType } from "redux-observable";
 import { addTodo, deleteTodo } from "../actions/todos";
 import {  delay, map } from 'rxjs/operators';
+import { Epic } from 'redux-observable';
+import { Observable } from "rxjs";
 
-const initialState = {
+type Todo = {
+     id: number, title: string, completed: boolean 
+}
+type StateShape = {
+    readonly todos: Todo[],
+    readonly visibilityFilter: string
+}
+const initialState: StateShape = {
   todos: [{id: 0, title: 'Learn Hooks', completed: false}, {id: 1, title: 'Learn Redux', completed: false}],
   visibilityFilter: "SHOW_ALL"
 };
+export type TodosAction = {
+    type: string,
+    payload?:any,
+    id?: number,
+    title?: string
+};
 
-const todosReducer = (state = initialState, action) => {
+const todosReducer = (state: StateShape = initialState, action: TodosAction) => {
     const { todos } = state;
     switch (action.type) {
         case ADD_TODO: {
@@ -35,17 +50,21 @@ const todosReducer = (state = initialState, action) => {
             return state;
     }
 };
-export const addTodosEpic = (action$) => action$.pipe(
+type AddTodosActionType = {
+    title: string
+}
+type DeleteTodosActionType = {
+    id: number
+}
+export const addTodosEpic: Epic<TodosAction, StateShape>  = (action$: Observable) => action$.pipe(
   ofType(ADD_TODO_DELAY),
   delay(400),
-  map(action => addTodo(action.title))
+    map((action: AddTodosActionType) => addTodo(action.title))
 );
 
-export const deleteTodosEpic = (action$) => action$.pipe(
+export const DeleteTodosActionType = (action$: Observable) => action$.pipe(
     ofType(DELETE_TODO_DELAY),
     delay(400),
-    map(action => deleteTodo(action.id))
+    map((action: DeleteTodosActionType) => deleteTodo(action.id))
 );
 export default todosReducer;
-
-

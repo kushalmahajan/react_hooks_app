@@ -19,7 +19,7 @@ export default function TodoList() {
             <div>You have {todoCount} todos</div>
             <ul>
                 {
-                    todos.map((todo: {title: string}, index: number) => <li key={index} {...todo}>{todo.title}</li>)
+                    todos.map((todo: { id: number, title: string }, index: number) => <TodoItem key={index} {...todo} />)
                 }
             </ul>
         </div>
